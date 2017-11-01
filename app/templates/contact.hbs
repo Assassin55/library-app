@@ -1,1 +1,27 @@
 <h1>Contact page</h1>
+
+<br/><br/>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group has-feedback">
+      <label>Your email address*:</label>
+      {{input type="email" class="form-control" placeholder="Your e-mail address." autofocus="autofocus" value=emailAddress}}
+    </div>
+
+    <div class="form-group has-feedback">
+      <label>Your message*:</label>
+      {{textarea class="form-control" placeholder="Your message. (At least 5 characters.)" rows="7" value=message}}
+    </div>
+
+    <button disabled={{disabled}} class="btn btn-success" {{action 'sendContact'}}>Send</button>
+
+    <br/><br/>
+
+    {{#if responseMessage}}
+      <div class="alert alert-success">
+        {{responseMessage}}
+      </div>
+    {{/if}}
+  </div>
+</div>

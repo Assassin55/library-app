@@ -1,24 +1,26 @@
 import Controller from '@ember/controller';
+import Ember from 'ember';
+
+const { computed } = Ember;
 
 export default Controller.extend({
 
-  isValid: Ember.computed.match('emailAddress', /^.+@.+\..+$/),
-  isDisabled: Ember.computed.not('isValid'),
+  isValid: computed.match('emailAddress', /^.+@.+\..+$/),
+  isDisabled: computed.not('isValid'),
   emailAddress: '',
   responseMessage: '',
 
-  // actualEmailAddress: Ember.computed('emailAddress', function() {
-  //   console.log('Computed is called: ', this.get('emailAddress'));
-  // }),
-  // emailAddressChanged: Ember.observer('emailAddress', function() {
-  //   console.log('Observer is called: ', this.get('emailAddress'));
-  // })
   actions: {
 
     saveInvitation() {
-      alert(`Saving of the following email address is in progress: ${this.get('emailAddress')}`);
-      this.set('responseMessage', `Thank you! We have just saved your email address: ${this.get('emailAddress')}`);
-      this.set('emailAddress', '');
+      const email = this.get('emailAddress');
+
+      const newInvitation = this.store.createRecord('invitation', { email: email });
+      newInvitation.save().then((response) => {
+        this.set('responseMessage', `Thank you! We have just saved your email address with the following id:
+          ${response.get('id')}`);
+        this.set('emailAddress', '');
+      });
     }
   }
 });

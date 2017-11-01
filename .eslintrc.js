@@ -12,5 +12,8 @@ module.exports = {
     browser: true
   },
   rules: {
+    "object-shorthand": 0,
+    "ember-suave/no-const-outside-module-scope": 0,
+    "ember-suave/no-direct-property-access": 0
   }
 };
