@@ -13,7 +13,6 @@ module.exports = {
   },
   rules: {
     "object-shorthand": 0,
-    "ember-suave/no-const-outside-module-scope": 0,
-    "ember-suave/no-direct-property-access": 0
+    "ember-suave/no-const-outside-module-scope": 0
   }
 };

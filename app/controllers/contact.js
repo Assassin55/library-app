@@ -15,9 +15,15 @@ export default Controller.extend({
 
   actions: {
     sendContact() {
-      this.set('responseMessage', 'We got your message and we’ll get in touch soon');
-      this.set('emailAddress', '');
-      this.set('message', '');
+      const newContact = this.store.createRecord('contact', {
+        email: this.get('emailAddress'),
+        message: this.get('message')
+      });
+      newContact.save().then(() => {
+        this.set('responseMessage', 'We got your message and we’ll get in touch soon');
+        this.set('emailAddress', '');
+        this.set('message', '');
+      });
     }
   }
 });
