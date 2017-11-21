@@ -12,6 +12,8 @@ export default Model.extend({
 
   isNotValid: computed.empty('name'),
 
+  isEditing: false,
+
   randomize() {
     this.set('name', Faker.name.findName());
     return this;
