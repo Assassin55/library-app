@@ -1,1 +1,31 @@
-{{outlet}}
+<h1>Books</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>
+          Book
+          <br><small class="small not-bold">(Click on book for editing)</small>
+        </th>
+        <th class="vtop">Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |book|}}
+        <tr>
+          {{#if book.isEditing}}
+          <form class="form-inline">
+            <div class="input-group">
+              {{input value=book.title class="form-control"}}
+              <button class="btn btn-success" {{action 'saveBook' book}}disabled={{book.isNotValid}}>Save</button>
+              <button class="btn btn-danger" {{action 'cancelBookEdit' book}}>Cancel</button>
+            </div>
+          </form>
+          {{else}}
+            <td {{action 'editBook' book}}>{{book.title}}</td>
+          {{/if}}
+          <td>{{book.author.name}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+</table>
